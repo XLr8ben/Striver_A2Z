@@ -42,7 +42,6 @@ Each folder contains:
 ## 💻 Languages Used
 
 * C++
-* (Optional: Add others if used, e.g., Java / Python)
 
 ---
 
@@ -67,7 +66,6 @@ Each folder contains:
 | Graphs              | 🔲 Not Started |
 | Dynamic Programming | 🔲 Not Started |
 
-*(Update this as you progress)*
 
 ---
 
@@ -110,5 +108,3 @@ If you find this helpful:
 ## 📬 Contact
 
 Feel free to connect with me for discussions or collaborations!
-
-Just tell me 👍
