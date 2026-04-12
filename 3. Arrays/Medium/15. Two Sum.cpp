@@ -27,7 +27,7 @@ using namespace std;
 //     return false;
 // }
 
-//beeter approach
+//better approach
 // We use an unordered_map (hash map) to store the elements of the array and their corresponding indices. As we iterate through the array, we calculate the complement of the current element (i.e., target - current element) and check if it exists in the hash map.
 // If the complement exists in the hash map, it means we have found a pair of elements that sum up to the target. We then store these two elements in the temp vector and return true.
 // If the complement does not exist in the hash map, we add the current element and its index to the hash map for future reference.
