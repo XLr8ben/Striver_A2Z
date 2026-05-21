@@ -61,24 +61,73 @@ using namespace std;
 // Time Complexity: O(N * logN), where N is the size of the given array. For using a map data structure, where insertion in the map takes logN time, and we are doing it for N elements. So, it results in the first term O(N * logN). On using unordered_map instead, the first term will be O(N) for the best and average case, and for the worst case, it will be O(N2).
 // Space Complexity: O(N) for using a map data structure. A list that stores a maximum of 2 elements is also used, but that space used is so small that it can be considered constant.
 
+// void Solution(vector<int>& arr, int n){
+//     unordered_map<int, int> mp;
+//     int mini = n/3+1;
+
+//     vector<int> ans;
+
+//     for(int i=0;i<n;i++){
+//         mp[arr[i]]++;
+
+//         if(mp[arr[i]] == mini){
+//             ans.push_back(arr[i]);
+//         }
+
+//         if(ans.size()==2) break;        
+//     }
+
+//     for(int x : ans) cout << x << " ";
+// }
+
+// Optimal Approach
+// Algorithm
+// Initialize four variables: cnt1 and cnt2 for tracking the counts of elements, and el1 and el2 for storing the potential majority elements.
+// Traverse through the given array:
+// If cnt1 is 0 and the current element is not equal to el2, set el1 to the current element and increment cnt1 by 1.
+// If cnt2 is 0 and the current element is not equal to el1, set el2 to the current element and increment cnt2 by 1.
+// If the current element is equal to el1, increment cnt1 by 1.
+// If the current element is equal to el2, increment cnt2 by 1.
+// In all other cases, decrease cnt1 and cnt2 by 1.
+// After processing all elements, el1 and el2 should be the candidate elements for majority. To confirm:
+// Use another loop to manually check the counts of el1 and el2 in the array.
+// If either el1 or el2's count is greater than floor(N/3), it is considered a valid majority element.
+
+// Time Complexity: O(N), where N is the size of the input array. We traverse the array twice: once to find potential candidates and once to validate them.
+// Space Complexity: O(1), as we are using a constant amount of space for the counters and candidate elements, regardless of the input size.
+
 void Solution(vector<int>& arr, int n){
-    unordered_map<int, int> mp;
     int mini = n/3+1;
 
-    vector<int> ans;
+    int ele1=0,ele2=0,cnt1=0,cnt2=0;
 
     for(int i=0;i<n;i++){
-        mp[arr[i]]++;
-
-        if(mp[arr[i]] == mini){
-            ans.push_back(arr[i]);
+        if(cnt1==0 && arr[i]!=ele2){
+            ele1=arr[i];
+            cnt1=1;
+        }else if(cnt2==0 && arr[i]!=ele1){
+            ele2=arr[i];
+            cnt2=1;
         }
 
-        if(ans.size()==2) break;        
+        else if(arr[i] == ele1) cnt1++;
+        else if(arr[i] == ele2) cnt2++;
+
+        else{
+            cnt1--;
+            cnt2--;
+        }
     }
 
-    for(int x : ans) cout << x << " ";
+    cnt1=0,cnt2=0;
 
+    for(int ele: arr){
+        if(ele == ele1) cnt1++;
+        if(ele == ele2) cnt2++;
+    }
+
+    if(cnt1 >= mini) cout<<ele1<<" ";
+    if(cnt2 >= mini) cout<<ele2<<" ";
 }
 
 int main()
