@@ -60,7 +60,7 @@ int Solution(vector<int>& arr, int n, int k){
     // so using these equations we derived
     // arr[high] + more;
     // arr[high] + (k - missing);
-    // arr[high] + (k - (arr[high] - (high -1)));
+    // arr[high] + (k - (arr[high] - (high - 1)));
     // k + high + 1; or k + low;
 }
 
