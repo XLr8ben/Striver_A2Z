@@ -40,7 +40,7 @@ using namespace std;
 //         }
 
 //         for(int i = 0; i < n - pos; i++){
-//             temp.push_back(arr[i]);
+//             temp.push_back(arr[i]);BD
 //         }
 //     }
 
