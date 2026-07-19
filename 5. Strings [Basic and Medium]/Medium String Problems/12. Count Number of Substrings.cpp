@@ -9,22 +9,37 @@
 using namespace std;
 
 
-int Solution(vector<int>& arr, int n){
-    
-    return 0;
+int atMostKDistinct(string str, int k) {
+    int left=0, res=0;
+
+    unordered_map<char, int> freq;
+
+    for(int right = 0; right<str.size(); right++){
+        freq[str[right]]++;
+
+        while(freq.size() > k){
+            freq[str[left]]--;
+            if(freq[str[left]] == 0) freq.erase(str[left]);
+            left++;
+        }
+        res += right - left + 1;
+    }
+    return res;
+}
+
+int Solution(string str, int k) {
+    return atMostKDistinct(str, k) - atMostKDistinct(str, k - 1);
 }
 
 int main()
 {
+    string str;
+    cin>>str;
+
     int n;
     cin>>n;
-    vector<int> arr(n);
 
-    for(int i=0; i<n; i++){
-        cin>>arr[i];
-    }
-
-    cout<<Solution(arr, n)<<endl;
+    cout<<Solution(str, n)<<endl;
 
     return 0;
 }
