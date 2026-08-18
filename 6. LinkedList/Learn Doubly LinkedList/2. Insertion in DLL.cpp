@@ -7,17 +7,17 @@ class Node {
 public:
     int data;
     Node* next;
-    Node* prev;
+    Node* back;
 
     Node(int val) {
         data = val;
         next = nullptr;
-        prev = nullptr;
+        back = nullptr;
     }
-    Node(int val, Node* next1, Node* prev1){
+    Node(int val, Node* next1, Node* back1){
         data = val;
         next = next1;
-        prev = prev1;
+        back = back1;
     }
 };
 
@@ -52,7 +52,7 @@ Node* convertToDLL(vector<int>& arr) {
         Node* temp = new Node(arr[i]);
 
         mover->next = temp;
-        temp->prev = mover;
+        temp->back = mover;
 
         mover = temp;
     }
@@ -72,7 +72,78 @@ string searchEle(Node* head, int x) {
     return "Not Found";
 }
 
-Node* 
+Node* insertBeforeHead(Node* head, int val){
+    if(head == nullptr){
+        return new Node(val);
+    }
+
+    Node* newHead = new Node(val, head, nullptr);
+    head->back = newHead;
+
+    return newHead;
+}
+
+Node* insertBeforeTail(Node* head, int val){
+    if(head == nullptr){
+        return new Node(val);
+    }
+
+    if(head->next == nullptr){
+        return insertBeforeHead(head, val);
+    }
+
+    Node* tail = head;
+    while(tail->next != nullptr){
+        tail = tail->next;
+    }
+
+    Node* prev = tail->back;
+    Node* newNode = new Node(val, tail, prev);
+
+    prev->next = newNode;
+    tail->back = newNode;
+
+    return head;
+}
+
+Node* insertBeforeKthEle(Node* head, int k, int val){
+    if(head == nullptr) return nullptr;
+
+    if(k == 1){
+        return insertBeforeHead(head, val);
+    }
+
+    int cnt = 1;
+    Node* temp = head;
+
+    while(temp != nullptr && cnt < k){
+        temp = temp->next;
+        cnt++;
+    }
+
+    if(temp == nullptr){
+        return head;
+    }
+
+    Node* prev = temp->back;
+    Node* newNode = new Node(val, temp, prev);
+
+    prev->next = newNode;
+    temp->back = newNode;
+
+    return head;
+}
+
+void insertBeforeNode(Node* node, int val){
+    if(node == nullptr || node->back == nullptr) return;
+
+    Node* prev = node->back;
+    Node* newNode = new Node(val, node, prev);
+
+    prev->next = newNode;
+    node->back = newNode;
+}
+
 
 int main() {
 
@@ -87,12 +158,50 @@ int main() {
 
     Node* head = convertToDLL(arr);
 
+    cout << "Original DLL: ";
     printDLL(head);
     cout << endl;
 
-    cout << "Length is " << lengthDLL(head) << endl;
+    cout << "Length = " << lengthDLL(head) << endl;
 
-    cout << searchEle(head, 2) << endl;
+    int x;
+    cout << "Enter element to search: ";
+    cin >> x;
+    cout << searchEle(head, x) << endl;
+
+    
+    int val;
+    cout << "Enter value to insert before head: ";
+    cin >> val;
+    head = insertBeforeHead(head, val);
+    cout << "After inserting before head: ";
+    printDLL(head);
+    cout << endl;
+
+    
+    cout << "Enter value to insert before tail: ";
+    cin >> val;
+    head = insertBeforeTail(head, val);
+    cout << "After inserting before tail: ";
+    printDLL(head);
+    cout << endl;
+
+    
+    int k;
+    cout << "Enter k and value to insert before kth node: ";
+    cin >> k >> val;
+    head = insertBeforeKthEle(head, k, val);
+    cout << "After inserting before " << k << "th node: ";
+    printDLL(head);
+    cout << endl;
+
+    cout << "Inserting 999 before the 3rd node..." << endl;
+    insertBeforeNode(head->next->next, 999);
+
+    cout << "After inserting before 3rd node: ";
+    printDLL(head);
+    cout << endl;
+
 
     return 0;
 }
