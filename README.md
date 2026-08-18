@@ -61,8 +61,8 @@ Each folder contains:
 | Sorting Techniques             | ✅ Completed   |
 | Arrays                         | ✅ Completed   |
 | Binary Search                  | ⏳ In Progress |
-| Strings                        | 🔲 Not Started |
-| Linked List                    | 🔲 Not Started |
+| Strings                        | ⏳ In Progress |
+| Linked List                    | ⏳ In Progress |
 | Recursion                      | 🔲 Not Started |
 | Bit Manipulation               | 🔲 Not Started |
 | Stack & Queues                 | 🔲 Not Started |
